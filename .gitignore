@@ -1,3 +1,8 @@
+# web
 web/node_modules/
 
+web/.next/
+
+
+# server
 server/node_modules/
