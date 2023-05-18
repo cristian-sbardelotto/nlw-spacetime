@@ -20,10 +20,12 @@ export function Profile() {
       <p className='leading-snug'>
         {name}
 
-        <a 
-          href=""
+        <a
+          href='/api/auth/logout'
           className='block text-red-400 hover:text-red-300 transition-colors'
-        >Sair</a>
+        >
+          Sair
+        </a>
       </p>
     </div>
   );
