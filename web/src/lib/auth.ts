@@ -10,11 +10,10 @@ type UserProps = {
 export function getUser(): UserProps {
   const token = cookies().get('token')?.value;
 
-  if (token) {
-    const user: UserProps = decode(token);
-
-    return user;
+  if (!token) {
+    throw new Error('Unauthenticated');
   }
 
-  throw new Error('Unauthenticated');
+  const user: UserProps = decode(token);
+  return user;
 }
