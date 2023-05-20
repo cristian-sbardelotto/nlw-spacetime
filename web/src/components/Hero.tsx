@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Button } from './Button';
+
 import nlwLogo from '../assets/nlw-spacetime-logo.svg';
 
 export function Hero() {
@@ -18,12 +20,9 @@ export function Hero() {
         </p>
       </div>
 
-      <Link
-        href='/memories/new'
-        className='inline-block uppercase rounded-full bg-green-500 px-5 py-3 font-alt text-sm leading-none text-black hover:bg-green-700 transition-colors'
-      >
-        cadastrar lembrança
-      </Link>
+      <Button>
+        <Link href='/memories/new'>cadastrar lembrança</Link>
+      </Button>
     </div>
   );
 }

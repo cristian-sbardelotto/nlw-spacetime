@@ -3,14 +3,14 @@
 import { FormEvent } from 'react';
 
 import { MediaPicker } from './MediaPicker';
+import { Button } from './Button';
 
 import { api } from '@/lib/api';
-
 import Cookie from 'js-cookie';
 
 import { Camera } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
+import { useRouter } from 'next/navigation';
 export function NewMemoryForm() {
   const router = useRouter();
 
@@ -34,15 +34,19 @@ export function NewMemoryForm() {
       coverUrl = uploadResponse.data.fileUrl;
     }
 
-    await api.post('/memories', {
-      coverUrl,
-      content: formData.get('content'),
-      isPublic: formData.get('isPublic'),
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`
+    await api.post(
+      '/memories',
+      {
+        coverUrl,
+        content: formData.get('content'),
+        isPublic: formData.get('isPublic'),
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
-    });
+    );
 
     router.push('/');
   }
@@ -82,12 +86,9 @@ export function NewMemoryForm() {
         className='w-full flex-1 resize-none rounded border-0 bg-transparent p-0 text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0'
       />
 
-      <button
-        type='submit'
-        className='inline-block self-end uppercase rounded-full bg-green-500 px-5 py-3 font-alt text-sm leading-none text-black hover:bg-green-700 transition-colors'
-      >
+      <Button type='submit' classes='self-end'>
         Salvar
-      </button>
+      </Button>
     </form>
   );
 }
