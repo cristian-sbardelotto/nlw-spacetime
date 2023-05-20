@@ -3,7 +3,7 @@ export function Copyright() {
     <div className='text-sm leading-relaxed text-gray-200'>
       Desenvolvido com 💜 por{' '}
       <a
-        href='https://linkedin.com/in/cristian-k-sbardelotto'
+        href='https://github.com/cristian-sbardelotto'
         target='_blank'
         rel='noreferrer'
         className='underline hover:text-gray-50 transition-colors'
