@@ -30,7 +30,7 @@ export default function RootLayout({
         <main className='grid grid-cols-2 min-h-screen'>
           <MainSection />
 
-          <div className='flex flex-col max-h-screen overflow-y-scroll bg-[url(../assets/bg-stars.svg)] bg-cover'>
+          <div className='flex flex-col max-h-screen bg-[url(../assets/bg-stars.svg)] bg-cover'>
             {children}
           </div>
         </main>
