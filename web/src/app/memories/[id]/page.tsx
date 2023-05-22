@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 import { api } from '@/lib/api';
+import { Button } from '@/components/Button';
 
 import Cookie from 'js-cookie';
 
@@ -47,7 +48,8 @@ export default async function MemoryDetails() {
       </Link>
 
       <div>
-        <h2 className='text-4xl text-gray-50 relative inline-block after:h-1 after:w-1/3 after:absolute after:top-[110%] after:left-0 after:bg-green-500 after:mb-3 font-alt'>Detalhes</h2>
+        <h2 className='text-4xl text-gray-50 relative inline-block mb-6 font-alt after:h-1 after:w-1/3 after:absolute after:top-[110%] after:left-0 after:bg-green-500'>Detalhes</h2>
+
         <Image
           src={memory.coverUrl}
           alt='Memory cover image'
@@ -64,12 +66,19 @@ export default async function MemoryDetails() {
 
         <hr />
 
-        <p className='text-lg leading-relaxed text-gray-100'>
-          Criado em{' '}
-          <span className='text-purple-700'>
-            {dayjs(memory.createdAt).format('D[ de ]MMMM[ de ]YYYY')}
-          </span>
-        </p>
+        <div className='flex justify-between'>
+          <p className='text-lg leading-relaxed text-gray-100'>
+            Criado em{' '}
+            <span className='text-purple-700'>
+              {dayjs(memory.createdAt).format('D[ de ]MMMM[ de ]YYYY')}
+            </span>
+          </p>
+
+          <Button backgroundColor='bg-red-400' >
+            Excluir
+          </Button>
+        </div>
+
       </div>
     </div>
   );
