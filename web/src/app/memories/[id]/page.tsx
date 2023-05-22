@@ -1,15 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
 import { api } from '@/lib/api';
 import { Button } from '@/components/Button';
+import { HomeLink } from '@/components/HomeLink';
 
 import Cookie from 'js-cookie';
-
-import { ChevronLeft } from 'lucide-react';
 
 import dayjs from 'dayjs';
 import ptBr from 'dayjs/locale/pt-br';
@@ -39,16 +37,12 @@ export default async function MemoryDetails() {
 
   return (
     <div className='px-8 h-screen flex flex-col gap-[10vh] overflow-y-hidden'>
-      <Link
-        href='/'
-        className='flex items-center gap-1 text-sm text-gray-200 hover:text-gray-100 transition-colors'
-      >
-        <ChevronLeft className='h-4 w-4' />
-        voltar à timeline
-      </Link>
+      <HomeLink />
 
       <div>
-        <h2 className='text-4xl text-gray-50 relative inline-block mb-6 font-alt after:h-1 after:w-1/3 after:absolute after:top-[110%] after:left-0 after:bg-green-500'>Detalhes</h2>
+        <h2 className='text-4xl text-gray-50 relative inline-block mb-6 font-alt after:h-1 after:w-1/3 after:absolute after:top-[110%] after:left-0 after:bg-green-500'>
+          Detalhes
+        </h2>
 
         <Image
           src={memory.coverUrl}
@@ -74,11 +68,8 @@ export default async function MemoryDetails() {
             </span>
           </p>
 
-          <Button backgroundColor='bg-red-400' >
-            Excluir
-          </Button>
+          <Button backgroundColor='bg-red-400'>Excluir</Button>
         </div>
-
       </div>
     </div>
   );
