@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 import { api } from '@/lib/api';
 import { Button } from '@/components/Button';
@@ -23,6 +23,7 @@ type MemoryProps = {
 
 export default async function MemoryDetails() {
   const { id } = useParams();
+  const router = useRouter();
   const token = Cookie.get('token');
 
   const response = await api.get(`/memories/${id}`, {
@@ -33,10 +34,18 @@ export default async function MemoryDetails() {
 
   const memory: MemoryProps = response.data;
 
-  if (!memory) return; // adicionar return para home
+  async function deleteMemory() {
+    await api.delete(`/memories/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    router.push('/');
+  }
 
   return (
-    <div className='px-8 h-screen flex flex-col gap-[10vh] overflow-y-hidden'>
+    <div className='px-8 py-12 h-screen flex flex-col gap-[7vh] overflow-y-hidden'>
       <HomeLink />
 
       <div>
@@ -66,9 +75,12 @@ export default async function MemoryDetails() {
             <span className='text-purple-700'>
               {dayjs(memory.createdAt).format('D[ de ]MMMM[ de ]YYYY')}
             </span>
+            .
           </p>
 
-          <Button backgroundColor='bg-red-400'>Excluir</Button>
+          <Button onClick={deleteMemory} backgroundColor='bg-red-400'>
+            Excluir
+          </Button>
         </div>
       </div>
     </div>

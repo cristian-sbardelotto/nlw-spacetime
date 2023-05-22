@@ -2,6 +2,8 @@ import { FastifyInstance } from 'fastify';
 
 import { z } from 'zod';
 
+import { unlink } from 'node:fs';
+
 import { prisma } from '../lib/prisma';
 
 export async function memoriesRoutes(app: FastifyInstance) {
@@ -14,7 +16,7 @@ export async function memoriesRoutes(app: FastifyInstance) {
         userId: request.user.sub,
       },
       orderBy: {
-        createdAt: 'asc',
+        createdAt: 'desc',
       },
     });
 
@@ -128,5 +130,14 @@ export async function memoriesRoutes(app: FastifyInstance) {
     await prisma.memory.delete({
       where: { id },
     });
+
+    const fileNameRegex = /\/([^/?#]+)$/;
+    const matchCoverUrlRegex = memory.coverUrl.match(fileNameRegex);
+
+    if (matchCoverUrlRegex) {
+      const fileName = matchCoverUrlRegex[1];
+
+      unlink(`uploads/${fileName}`, error => console.error(error));
+    }
   });
 }
