@@ -9,3 +9,5 @@ web/.env.local
 server/node_modules/
 
 server/.env
+
+server/uploads/

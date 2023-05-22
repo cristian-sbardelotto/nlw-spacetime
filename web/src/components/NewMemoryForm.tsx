@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { MediaPicker } from './MediaPicker';
 import { Button } from './Button';
@@ -10,7 +11,21 @@ import Cookie from 'js-cookie';
 
 import { Camera } from 'lucide-react';
 
-import { useRouter } from 'next/navigation';
+function getTodayDate(): string {
+  const date = new Date();
+
+  const currentDay = date.getDate();
+
+  const month = date.getMonth() + 1; 
+  const formattedMonth = month <= 9 ? `0${month}` : month;
+
+  const currentYear = date.getFullYear();
+  
+  const todayDate = `${currentYear}-${formattedMonth}-${currentDay}`;
+
+  return todayDate;
+}
+
 export function NewMemoryForm() {
   const router = useRouter();
 
@@ -40,6 +55,7 @@ export function NewMemoryForm() {
         coverUrl,
         content: formData.get('content'),
         isPublic: formData.get('isPublic'),
+        createdAt: formData.get('createdAt'),
       },
       {
         headers: {
@@ -61,6 +77,8 @@ export function NewMemoryForm() {
           <Camera className='w-4 h-4' />
           Anexar foto ou vídeo
         </label>
+
+        <input type="date" name='createdAt' value={getTodayDate()} />
 
         <label
           htmlFor='isPublic'
