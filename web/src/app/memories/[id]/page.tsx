@@ -45,7 +45,7 @@ export default async function MemoryDetails() {
   }
 
   return (
-    <div className='px-8 py-12 h-screen flex flex-col gap-[7vh] overflow-y-hidden'>
+    <div className='px-8 py-12 h-screen flex flex-col gap-[7vh] overflow-y-scroll'>
       <HomeLink />
 
       <div>

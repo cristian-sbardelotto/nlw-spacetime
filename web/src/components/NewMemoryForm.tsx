@@ -16,11 +16,11 @@ function getTodayDate(): string {
 
   const currentDay = date.getDate();
 
-  const month = date.getMonth() + 1; 
+  const month = date.getMonth() + 1;
   const formattedMonth = month <= 9 ? `0${month}` : month;
 
   const currentYear = date.getFullYear();
-  
+
   const todayDate = `${currentYear}-${formattedMonth}-${currentDay}`;
 
   return todayDate;
@@ -78,7 +78,12 @@ export function NewMemoryForm() {
           Anexar foto ou vídeo
         </label>
 
-        <input type="date" name='createdAt' value={getTodayDate()} />
+        <input
+          type='date'
+          name='createdAt'
+          className='bg-zinc-900 text-gray-200 rounded'
+          defaultValue={getTodayDate()}
+        />
 
         <label
           htmlFor='isPublic'
