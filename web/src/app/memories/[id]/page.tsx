@@ -34,6 +34,22 @@ export default async function MemoryDetails() {
 
   const memory: MemoryProps = response.data;
 
+  async function updateMemory() {
+    await api.put(
+      `/memories/${id}`,
+      {
+        content: 'This is the new content. Update',
+        coverUrl: 'https://github.com/cristian-sbardelotto.png',
+        isPublic: false,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+
   async function deleteMemory() {
     await api.delete(`/memories/${id}`, {
       headers: {
@@ -78,9 +94,15 @@ export default async function MemoryDetails() {
             .
           </p>
 
-          <Button onClick={deleteMemory} backgroundColor='bg-red-400'>
-            Excluir
-          </Button>
+          <div className='flex gap-4'>
+            <Button onClick={updateMemory} backgroundColor='bg-yellow-500'>
+              Editar
+            </Button>
+
+            <Button onClick={deleteMemory} backgroundColor='bg-red-400'>
+              Excluir
+            </Button>
+          </div>
         </div>
       </div>
     </div>
