@@ -21,18 +21,27 @@ type MemoryProps = {
   createdAt: string;
 };
 
-export default async function MemoryDetails() {
-  const { id } = useParams();
-  const router = useRouter();
-  const token = Cookie.get('token');
+type ResponseDataProps = {
+  id: string | undefined ;
+  token: string | undefined;
+};
 
+async function getData({ id, token }: ResponseDataProps) {
   const response = await api.get(`/memories/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
-  const memory: MemoryProps = response.data;
+  return response.data;
+}
+
+export default async function MemoryDetails() {
+  const { id } = useParams();
+  const router = useRouter();
+  const token = Cookie.get('token');
+
+  const memory: MemoryProps = await getData({ id, token });
 
   async function updateMemory() {
     await api.put(
@@ -84,6 +93,10 @@ export default async function MemoryDetails() {
         </p>
 
         <hr />
+
+        {/* {
+          isEditing ? 'Estça editando' : 'nao ta editando'
+        } */}
 
         <div className='flex justify-between'>
           <p className='text-lg leading-relaxed text-gray-100'>
